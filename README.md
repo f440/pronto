@@ -7,7 +7,7 @@
 [![Inline docs](http://inch-ci.org/github/mmozuras/pronto.svg)](http://inch-ci.org/github/mmozuras/pronto)
 
 **Pronto** runs analysis quickly by checking only the relevant changes. Created to
-be used on [pull requests](#github-integration), but also works [locally](#local-changes) and integrates with [GitLab](#gitlab-integration) and [Bitbucket](#bitbucket-integration).
+be used on [pull requests](#github-integration), but also works [locally](#local-changes) and integrates with [GitLab](#gitlab-integration), [Bitbucket](#bitbucket-integration) and [Bitbucket Server](#bitbucket-server-integration).
 Perfect if want to find out quickly if branch introduces changes that conform
 to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](https://github.com/mmozuras/pronto-flay), [don't introduce security holes](https://github.com/mmozuras/pronto-brakeman) and [more](#runners).
 
@@ -19,6 +19,7 @@ to your [styleguide](https://github.com/mmozuras/pronto-rubocop), [are DRY](http
     * [GitHub Integration](#github-integration)
     * [GitLab Integration](#gitlab-integration)
     * [Bitbucket Integration](#bitbucket-integration)
+    * [Bitbucket Server Integration](#bitbucket-server-integration)
 * [Configuration](#configuration)
 * [Runners](#runners)
 * [Articles](#articles)
@@ -169,6 +170,22 @@ or, if you want comments to appear on pull request diff, instead of commit:
 $ BITBUCKET_USERNAME=user BITBUCKET_PASSWORD=pass pronto run -f bitbucket_pr -c origin/master
 ```
 
+### Bitbucket Server Integration
+
+You can run Pronto as a step of your CI builds and get the results as comments
+on Bitbucket commits using `BitbucketServerPullRequestFormatter`.
+
+Add Pronto runners you want to use to your Gemfile:
+
+Set the BITBUCKET_SERVER_USERNAME and BITBUCKET_SERVER_PASSWORD environment variables or values in `.pronto.yml`.
+.
+
+Then just run it:
+
+```sh
+$ BITBUCKET_SERVER_USERNAME=user BITBUCKET_SERVER_PASSWORD=pass pronto run -f bitbucket_pr -c origin/master
+```
+
 ## Configuration
 
 The behavior of Pronto can be controlled via the `.pronto.yml` configuration
@@ -194,6 +211,11 @@ bitbucket:
   username: user
   password: pass
   web_endpoint: https://bitbucket.org/
+bitbucket_server:
+  slug: mmozuras/pronto
+  username: user
+  password: pass
+  api_endpoint: https://bitbucket.example.com/
 max_warnings: 150
 verbose: false
 ```

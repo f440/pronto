@@ -22,6 +22,13 @@ module Pronto
         'password' => nil,
         'web_endpoint' => 'https://bitbucket.org/'
       },
+      'bitbucket_server' => {
+        'slug' => nil,
+        'username' => nil,
+        'password' => nil,
+        'api_endpoint' => nil,
+        'web_endpoint' => nil,
+      },
       'runners' => [],
       'formatters' => [],
       'max_warnings' => nil,
